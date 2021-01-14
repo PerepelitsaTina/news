@@ -1,2 +1,9 @@
 
-<mat-toolbar color="accent"></mat-toolbar>
+<mat-toolbar color="primary"></mat-toolbar>
+
+<div class="news-list">
+  <app-news 
+  *ngFor="let newsItem of newsService.news"
+  [item]="newsItem"  
+  ></app-news>
+</div> 
