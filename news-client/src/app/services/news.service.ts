@@ -9,6 +9,15 @@ export interface INews {
   tags: string;
   title: string;
   content: string;
+  user: IUser;
+}
+
+export interface IUser {
+  id: number;
+  email: string;
+  login: string;
+  password: string;
+  avatar: string;
 }
 
 @Injectable({

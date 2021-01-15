@@ -1,9 +1,11 @@
-
 <mat-toolbar color="primary"></mat-toolbar>
 
+<app-search></app-search>
+
 <div class="news-list">
-  <app-news 
-  *ngFor="let newsItem of newsService.news"
-  [item]="newsItem"  
-  ></app-news>
-</div> 
+    <mat-grid-list cols="2" rowHeight="200px">
+        <mat-grid-tile *ngFor="let newsItem of newsService.news" style.justify-self="stretch">
+            <app-news [item]="newsItem"></app-news>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
