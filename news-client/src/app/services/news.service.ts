@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ISearchSet } from '../search/search.component';
 
 export interface INews {
   id?: number;
@@ -34,8 +35,6 @@ export class NewsService {
     .subscribe(news => {
       this.news = news
       console.log(this.news);
-      
     })
   }
-
 }

@@ -1,11 +1,9 @@
 <mat-toolbar color="primary"></mat-toolbar>
 
-<app-search></app-search>
+<app-search
+  (filterSet)="setSearch($event)"
+></app-search>
 
 <div class="news-list">
-    <mat-grid-list cols="2" rowHeight="200px">
-        <mat-grid-tile *ngFor="let newsItem of newsService.news" style.justify-self="stretch">
-            <app-news [item]="newsItem"></app-news>
-        </mat-grid-tile>
-    </mat-grid-list>
+  <app-news *ngFor="let newsItem of newsService.news | search:searchFilter:searchString" [item]="newsItem"></app-news>
 </div>
