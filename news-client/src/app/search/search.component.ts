@@ -24,14 +24,13 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  searchNews() {
-    const data: ISearchSet = {
-      searchFilter: this.searchFilter,
-      searchString: this.searchString
-    };
-    this.filterSet.emit(data);
-    console.log(data);
-
+  searchNews(event?: KeyboardEvent) {
+    if(!event || event.key === "Enter") {
+      const data: ISearchSet = {
+        searchFilter: this.searchFilter,
+        searchString: this.searchString
+      };
+      this.filterSet.emit(data);
+    }
   }
-
 }

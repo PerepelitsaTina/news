@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "user",
-    "password": "fusion",
-    "database": "NewsBD",
+    "username": "dunice",
+    "password": "dunice",
+    "database": "NewsDB",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
