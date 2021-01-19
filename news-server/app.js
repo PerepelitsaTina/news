@@ -5,6 +5,7 @@ const logger = require('morgan');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const { strategy } = require('./utils/jwt');
+const cors = require('cors')
 
 
 const newsRouter = require('./routes/news');
@@ -13,6 +14,7 @@ const auth = passport.authenticate('jwt', {session: false});
 
 const app = express();
 
+app.use(cors());
 app.use(passport.initialize())
 app.use(logger('dev'));
 app.use(bodyParser.json());
