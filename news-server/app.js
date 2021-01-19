@@ -9,6 +9,7 @@ const { strategy } = require('./utils/jwt');
 
 const newsRouter = require('./routes/news');
 const userRouter = require('./routes/users');
+const auth = passport.authenticate('jwt', {session: false});
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 passport.use(strategy);
 
-app.use('/news', newsRouter);
+app.use('/news', auth, newsRouter);
 app.use('/users', userRouter);
 
 module.exports = app;
