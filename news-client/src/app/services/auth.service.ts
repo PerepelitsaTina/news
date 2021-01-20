@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 export interface IUser {
-  id: number;
+  user: {
+    id: number;
   email: string;
   login: string;
   avatar: string;
   createdAt: string;
   updatedAt: string;
+  }
   token?: string;
-
 }
 
 @Injectable({
@@ -18,15 +20,15 @@ export interface IUser {
 })
 export class AuthService {
 
-  private currentUserSubject: BehaviorSubject<IUser>;
-  public currentUser: Observable<IUser>;
+  private currentUserSubject: BehaviorSubject<IUser | null>;
+  public currentUser: Observable<IUser | null>;
 
-  constructor(private http: HttpClient) { 
-    this.currentUserSubject = new BehaviorSubject<IUser>(JSON.parse(localStorage.getItem('currentUser')  || '{}'));
+  constructor(private http: HttpClient, private router: Router) { 
+    this.currentUserSubject = new BehaviorSubject<IUser | null>(JSON.parse(localStorage.getItem('currentUser') || "null"));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): IUser {
+  public get currentUserValue(): IUser | null {
     return this.currentUserSubject.value;
   }
 
@@ -40,5 +42,11 @@ export class AuthService {
         }
         console.log(response);
       });
+  }
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+    this.router.navigate(["/"]);
   }
 }
