@@ -10,6 +10,7 @@ export class AppComponent implements OnInit{
 
   searchFilter: string = "all";
   searchString: string = "";
+  page: number = 1;
 
   constructor(public newsService: NewsService) {}
 
