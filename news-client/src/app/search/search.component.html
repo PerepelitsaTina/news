@@ -1,0 +1,17 @@
+<div class="search-form">
+  <form (submit)="searchNews()">
+    <mat-form-field class="search-input">
+      <input type="search" matInput placeholder="Поиск" [(ngModel)]="searchString" name="search">
+    </mat-form-field>
+  </form>
+  <button mat-raised-button color="primary" class="search-btn" (click)="searchNews()">
+    Искать
+  </button>
+  <mat-form-field class="search-select">
+    <select matNativeControl [(ngModel)]="searchFilter">
+      <option value="all">Везде</option>
+      <option value="tags">По тегам</option>
+      <option value="user">По автору</option>
+    </select>
+  </mat-form-field>
+</div>

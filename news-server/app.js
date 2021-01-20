@@ -2,11 +2,9 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
-const jwt = require('jsonwebtoken');
+const cors = require('cors')
 const passport = require('passport');
 const { strategy } = require('./utils/jwt');
-const cors = require('cors')
-
 
 const newsRouter = require('./routes/news');
 const userRouter = require('./routes/users');

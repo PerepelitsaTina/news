@@ -1,0 +1,11 @@
+<app-search
+  (filterSet)="setSearch($event)"
+></app-search>
+
+<div class="news-list">
+  <app-news 
+    *ngFor="let newsItem of newsService.news | search:searchFilter:searchString | paginate: { itemsPerPage: 2, currentPage: page }" 
+    [item]="newsItem"></app-news>
+</div>
+
+<pagination-controls (pageChange)="page = $event"></pagination-controls>

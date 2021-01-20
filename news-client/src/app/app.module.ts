@@ -1,27 +1,34 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatCardModule} from '@angular/material/card';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatSelectModule} from '@angular/material/select';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatCardModule} from '@angular/material/card';
+import { NewsComponent } from './news/news.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { SearchComponent } from './search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS }   from '@angular/common/http';
-import { MatSliderModule } from '@angular/material/slider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
-
+import { FormsModule } from '@angular/forms';
+import { SearchPipe } from './pipes/search.pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { HomePageComponent } from './home-page/home-page.component';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    NewsComponent,
+    SearchComponent,
+    SearchPipe,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +42,8 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    NgxPaginationModule
   ],
   providers: [
     { 
