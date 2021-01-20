@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import config from '../config'
 
 export interface INews {
   id?: number;
@@ -24,11 +25,12 @@ export interface IUser {
 export class NewsService {
 
   news: INews[] = [];
+  url: string = `${config.url}/news`;
 
   constructor(private http: HttpClient) { }
 
   getNews() {
-    this.http.get<INews[]>('http://localhost:3000/news')
+    this.http.get<INews[]>(this.url)
     .subscribe(news => {
       this.news = news
     })

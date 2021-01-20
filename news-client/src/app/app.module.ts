@@ -16,12 +16,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from './pipes/search.pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { HomePageComponent } from './home-page/home-page.component';
 @NgModule({
   declarations: [
     AppComponent,
     NewsComponent,
     SearchComponent,
-    SearchPipe
+    SearchPipe,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

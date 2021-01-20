@@ -24,8 +24,7 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  searchNews(event?: KeyboardEvent) {
-    if(!event || event.key === "Enter") {
+  searchNews() {
       const data: ISearchSet = {
         searchFilter: this.searchFilter,
         searchString: this.searchString
@@ -33,4 +32,4 @@ export class SearchComponent implements OnInit {
       this.filterSet.emit(data);
     }
   }
-}
+

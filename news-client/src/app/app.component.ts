@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ISearchSet } from './search/search.component';
-import { INews, NewsService } from './services/news.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,19 +6,8 @@ import { INews, NewsService } from './services/news.service';
 })
 export class AppComponent implements OnInit{
 
-  searchFilter: string = "all";
-  searchString: string = "";
-  page: number = 1;
-
-  constructor(public newsService: NewsService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.newsService.getNews();
   }
-
-  setSearch(data: ISearchSet) {
-    this.searchFilter = data.searchFilter;
-    this.searchString = data.searchString;
-  }
-
 }

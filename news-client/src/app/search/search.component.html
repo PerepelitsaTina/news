@@ -1,17 +1,10 @@
 <div class="search-form">
-  <mat-form-field class="search-input">
-    <input 
-      type="search" 
-      matInput 
-      placeholder="Поиск" 
-      [(ngModel)]="searchString" 
-      (keypress)="searchNews($event)"
-    >
-  </mat-form-field>
-  <button 
-    class="search-btn" 
-    (click)="searchNews()"
-  >
+  <form (submit)="searchNews()">
+    <mat-form-field class="search-input">
+      <input type="search" matInput placeholder="Поиск" [(ngModel)]="searchString" name="search">
+    </mat-form-field>
+  </form>
+  <button mat-raised-button color="primary" class="search-btn" (click)="searchNews()">
     Искать
   </button>
   <mat-form-field class="search-select">
