@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -8,18 +7,24 @@ import {MatCardModule} from '@angular/material/card';
 import { NewsComponent } from './news/news.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { SearchComponent } from './search/search.component';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
-import {MatButtonModule} from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS }   from '@angular/common/http';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from './pipes/search.pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { HomePageComponent } from './home-page/home-page.component';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    RegistrationComponent,
     NewsComponent,
     SearchComponent,
     SearchPipe,
@@ -40,7 +45,13 @@ import { HomePageComponent } from './home-page/home-page.component';
     MatButtonModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+    { 
+    provide: HTTP_INTERCEPTORS, 
+    useClass: JwtInterceptor, 
+    multi: true 
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

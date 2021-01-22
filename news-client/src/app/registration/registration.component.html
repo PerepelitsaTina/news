@@ -1,0 +1,11 @@
+<div class="reg-form">
+    <h1>Регистрация пользователя</h1>
+    <mat-form-field class="email-input">
+        <input matInput type="email" placeholder="Ваш емейл" [(ngModel)]="email">
+    </mat-form-field>
+    <mat-form-field class="password-input">
+        <input matInput type="password" placeholder="Ваш пароль" [(ngModel)]="password">
+    </mat-form-field >
+    <button mat-raised-button color="accent" class="reg-btn" (click)="register()">Регистрация</button>
+    <a routerLink="/login" mat-button color="primary">Уже зарегистрированы? Войти</a>
+</div>

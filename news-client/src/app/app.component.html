@@ -1,3 +1,25 @@
-<mat-toolbar color="primary"></mat-toolbar>
-
-<app-home-page></app-home-page>
+<mat-toolbar color="primary">
+  <button 
+    mat-raised-button 
+    color="accent" 
+    *ngIf="this.authService.currentUserValue"
+    (click)="this.authService.logout()"
+  >
+    Выйти
+  </button>
+  <p 
+    *ngIf="this.authService.currentUserValue"
+    class="greeting"
+  >
+    Привет, {{this.authService.currentUserValue.user.login}}!
+  </p>
+  <button 
+    routerLink="/login" 
+    mat-raised-button 
+    color="accent" 
+    *ngIf="!this.authService.currentUserValue"
+  >
+    Войти
+  </button>
+</mat-toolbar>
+<router-outlet></router-outlet>
