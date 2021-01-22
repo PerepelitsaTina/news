@@ -40,13 +40,11 @@ export class AuthService {
           localStorage.setItem('currentUser', JSON.stringify(response));
           this.currentUserSubject.next(response);
         }
-        console.log(response);
       });
   }
 
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    this.router.navigate(["/"]);
   }
 }

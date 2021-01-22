@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 passport.use(strategy);
 
-app.use('/news', auth, newsRouter);
+app.use('/news', newsRouter);
 app.use('/users', userRouter);
 
 module.exports = app;

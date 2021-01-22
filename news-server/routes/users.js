@@ -3,7 +3,8 @@ const db = require('../models/index');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const { createToken } = require('../utils/jwt')
+const { createToken } = require('../utils/jwt');
+const { response } = require('../app');
 
 
 router.post("/register", async (req, res, next) => {
@@ -25,6 +26,7 @@ router.post("/register", async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
+    response.status(err.status || 500).send('User was not created');
   }
 });
 
@@ -47,8 +49,8 @@ router.post("/login", async (req, res, next) => {
     } else {
       res.sendStatus(401);
     }
-  } catch {
-    res.sendStatus(401);
+  } catch (error) {
+    res.sendStatus(error.status || 500);
   }
 })
 

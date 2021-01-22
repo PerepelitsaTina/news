@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service'
+import { AuthService } from '../services/auth.service';
+import config from '../config';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
       password: this.password
     }
     console.log(data);
-    this.authService.auth(data, `http://localhost:3000/users/login`);
+    this.authService.auth(data, `${config.url}/users/login`);
     this.email = this.password = "";
   }
 }

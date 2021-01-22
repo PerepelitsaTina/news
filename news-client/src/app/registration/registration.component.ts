@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import config from '../config';
+
 
 @Component({
   selector: 'app-registration',
@@ -22,7 +24,7 @@ export class RegistrationComponent implements OnInit {
       email: this.email,
       password: this.password
     };
-    this.authService.auth(data, `http://localhost:3000/users/register`);
+    this.authService.auth(data, `${config.url}/users/register`);
     this.email = this.password = "";
   }
 
