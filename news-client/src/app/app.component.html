@@ -1,12 +1,18 @@
-<mat-toolbar color="primary">
-  <button 
-    mat-raised-button 
-    color="accent" 
-    *ngIf="this.authService.currentUserValue"
-    (click)="this.authService.logout()"
-  >
-    Выйти
-  </button>
+<mat-toolbar class="top-panel" color="primary">
+  <div class="icons">
+    <button routerLink="/" mat-mini-fab color="accent" class="home-icon">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button 
+      *ngIf="this.authService.currentUserValue" 
+      [routerLink]="['user', this.authService.currentUserValue.user.id]" 
+      mat-mini-fab 
+      color="accent" 
+      class="profile-icon"
+    >
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
   <p 
     *ngIf="this.authService.currentUserValue"
     class="greeting"
@@ -21,5 +27,13 @@
   >
     Войти
   </button>
+  <button 
+  mat-raised-button 
+  color="accent" 
+  *ngIf="this.authService.currentUserValue"
+  (click)="this.authService.logout()"
+>
+  Выйти
+</button>
 </mat-toolbar>
 <router-outlet></router-outlet>

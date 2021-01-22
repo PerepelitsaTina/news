@@ -12,16 +12,16 @@ export class SearchPipe implements PipeTransform {
       case "tags":
         return news.filter(item => item.tags.includes(search));
       case "user":
-        return news.filter(item => item.user.login.includes(search));
+        return news.filter(item => item.user?.login.includes(search));
       default:
         return news.filter(item => {
           const itemValues = {
             tags: item.tags,
             content: item.content,
             title: item.title,
-            user: item.user.login
+            user: item.user?.login
           };
-          return Object.values(itemValues).some(item => item.includes(search))
+          return Object.values(itemValues).some(item => item?.includes(search))
         });
     }
   }

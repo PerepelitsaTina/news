@@ -20,6 +20,9 @@ import { SearchPipe } from './pipes/search.pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { HomePageComponent } from './home-page/home-page.component';
 import { MatSelectModule } from '@angular/material/select';
+import { UserComponent } from './user/user.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +31,8 @@ import { MatSelectModule } from '@angular/material/select';
     NewsComponent,
     SearchComponent,
     SearchPipe,
-    HomePageComponent
+    HomePageComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatDividerModule,
+    MatIconModule
   ],
   providers: [
     { 

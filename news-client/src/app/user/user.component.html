@@ -1,0 +1,20 @@
+<div class="user-page-container">
+    <div class="user-info">
+        <img [attr.src]="this.userService.user.avatar ? this.userService.user.avatar : '../../assets/no-avatar.png'" class="user-avatar">
+        <div class="user-info-body">
+            <h1>Логин: {{this.userService.user.login}}</h1>
+            <h1>Емейл: {{this.userService.user.email}}</h1>
+        </div>
+        <div *ngIf="isCurrentUser" class="user-control-buttons">
+            <button class="change-info-btn" mat-raised-button color="primary">Изменить данные</button>
+            <button class="add-post-btn" mat-raised-button color="accent">Добавить новый пост</button>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="news-list">
+        <app-news 
+          *ngFor="let newsItem of this.userService.user.news" 
+          [item]="newsItem"></app-news>
+      </div>
+</div>
+

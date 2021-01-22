@@ -41,6 +41,7 @@ export class AuthService {
           this.currentUserSubject.next(response);
         }
       });
+      this.router.navigate(['/'])
   }
 
   logout() {
