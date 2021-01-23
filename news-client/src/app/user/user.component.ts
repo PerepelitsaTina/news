@@ -13,23 +13,24 @@ import { UserService } from '../services/user.service';
 export class UserComponent implements OnInit {
 
   id!: number;
-  routeSubscription: Subscription;
+  user!: IUser;
   isCurrentUser!: boolean;
 
   constructor(private route: ActivatedRoute, 
               public userService: UserService,
               public authService: AuthService) {
-    this.routeSubscription = this.route.params.subscribe(params => {
-      this.id = params['id']
-    });
    }
 
   ngOnInit(): void {
-    this.userService.getUser(this.id);
+    this.route.params.subscribe(params => {
+      this.userService.getUser(+params.id).subscribe(user => {
+        this.user = user;
+        this.isCurrentUser = this.authService.currentUserValue?.user.id === this.user.id;
+      });
+    });
   }
-
+  
   ngDoCheck() {
-    this.isCurrentUser = this.authService.currentUserValue?.user.id === this.userService.user.id;
   }
 
 }

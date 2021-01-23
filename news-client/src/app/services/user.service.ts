@@ -8,13 +8,9 @@ import config from '../config'
 })
 export class UserService {
 
-  user!: IUser
-
   constructor(private http: HttpClient) { }
 
   getUser(id: number) {
-   this.http.get<IUser>(`${config.url}/users/${id}`).subscribe(user => {
-     this.user = user;
-   })
+   return this.http.get<IUser>(`${config.url}/users/${id}`)
   }
 }

@@ -1,5 +1,8 @@
 <div class="reg-form">
     <h1>Регистрация пользователя</h1>
+    <mat-form-field class="login-input">
+        <input matInput type="text" placeholder="Ваш логин" [(ngModel)]="login">
+    </mat-form-field>
     <mat-form-field class="email-input">
         <input matInput type="email" placeholder="Ваш емейл" [(ngModel)]="email">
     </mat-form-field>
