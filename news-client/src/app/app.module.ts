@@ -23,6 +23,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { UserComponent } from './user/user.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AddNewsComponent } from './add-news/add-news.component';
+import {TextFieldModule} from '@angular/cdk/text-field';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +35,8 @@ import {MatIconModule} from '@angular/material/icon';
     SearchComponent,
     SearchPipe,
     HomePageComponent,
-    UserComponent
+    UserComponent,
+    AddNewsComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     NgxPaginationModule,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
+    TextFieldModule
   ],
   providers: [
     { 

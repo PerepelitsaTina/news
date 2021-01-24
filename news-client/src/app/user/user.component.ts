@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { IUser } from '../services/news.service';
 import { UserService } from '../services/user.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { AddNewsComponent } from '../add-news/add-news.component';
 
 @Component({
   selector: 'app-user',
@@ -18,7 +19,8 @@ export class UserComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, 
               public userService: UserService,
-              public authService: AuthService) {
+              public authService: AuthService,
+              public dialog: MatDialog) {
    }
 
   ngOnInit(): void {
@@ -30,7 +32,16 @@ export class UserComponent implements OnInit {
     });
   }
   
-  ngDoCheck() {
+  openDialog() {
+     const dialogRef = this.dialog.open(AddNewsComponent, {
+      width: '600px',
+      data: {user_id: this.user.id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
   }
 
-}
+
