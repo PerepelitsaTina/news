@@ -1,12 +1,15 @@
 <mat-card class="news-card">
-  <mat-card-header>
-    <mat-card-title>{{item.title}}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <p>{{item.content}}</p>
-  </mat-card-content>
-  <mat-card-subtitle>
-    <p>Теги: {{item.tags}}</p>
-    <p *ngIf="item.user" > Автор: <a [routerLink]="['user', item.user.id]">{{item.user.login}}</a></p>
-  </mat-card-subtitle>
+  <div class="news-body">
+    <mat-card-header>
+      <mat-card-title>{{item.title}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{item.content}}</p>
+    </mat-card-content>
+    <mat-card-subtitle>
+      <p>Теги: {{item.tags}}</p>
+      <p *ngIf="item.user" > Автор: <a [routerLink]="['user', item.user.id]">{{item.user.login}}</a></p>
+    </mat-card-subtitle>
+  </div>
+  <img *ngIf="item.images" src="{{url}}/{{item.images}}" class="news-image">
 </mat-card>

@@ -56,9 +56,13 @@ router.post("/login", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    let user  = await db.User.findByPk(req.params.id, {
-      include: {model: db.News, as: "news"}
+    let user = await db.User.findByPk(req.params.id, {
+      include: {
+        model: db.News, as: "news"
+      },
+      order: [[{ model: db.News, as: "news" }, 'createdAt', 'DESC']]
     });
+
     if (!user) {
       return res.status(404).send("User is not found");
     }

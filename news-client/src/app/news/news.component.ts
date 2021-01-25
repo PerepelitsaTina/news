@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { INews, NewsService } from '../services/news.service';
+import  config  from '../config'
 
 @Component({
   selector: 'app-news',
@@ -8,8 +9,11 @@ import { INews, NewsService } from '../services/news.service';
 })
 export class NewsComponent implements OnInit {
 
+  url: string = config.url;
+
   @Input() item!: INews
-  constructor(private newsService: NewsService) { }
+  constructor(private newsService: NewsService) {
+   }
 
   ngOnInit(): void {
   }

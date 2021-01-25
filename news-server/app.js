@@ -13,6 +13,7 @@ const auth = passport.authenticate('jwt', {session: false});
 const app = express();
 
 app.use(cors());
+app.use('/uploads', express.static('uploads'));
 app.use(passport.initialize())
 app.use(logger('dev'));
 app.use(bodyParser.json());
