@@ -52,8 +52,22 @@ router.post("/login", async (req, res, next) => {
   } catch (error) {
     res.sendStatus(error.status || 500);
   }
+});
+
+router.get("/:id", async (req, res, next) => {
+  try {
+    let user  = await db.User.findByPk(req.params.id, {
+      include: {model: db.News, as: "news"}
+    });
+    if (!user) {
+      return res.status(404).send("User is not found");
+    }
+    user = user.toJSON();
+    delete user.password;
+    res.send(user);
+  } catch (error) {
+    res.sendStatus(error.status || 500);
+  }
 })
-
-
 
 module.exports = router;

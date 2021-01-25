@@ -2,3 +2,15 @@
     margin-bottom: 0;
     margin-left: 20px;
 }
+
+.top-panel {
+    justify-content: space-between;
+}
+
+.icons {
+    display: flex;
+}
+
+.profile-icon {
+    margin-left: 20px;
+}

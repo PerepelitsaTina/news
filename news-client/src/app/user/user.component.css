@@ -1,0 +1,31 @@
+.user-page-container {
+    padding: 80px 150px;
+}
+
+.user-info {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.user-avatar {
+    width: 150px;
+    height: 150px;
+    border: 2px solid rgb(196, 196, 196);
+    border-radius: 50%;
+}
+
+.user-info-body, .user-control-buttons {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin-left: 50px;
+}
+
+.change-info-btn {
+    margin-bottom: 10px;
+}
+
+.news-list {
+    padding: 30px;
+}
+

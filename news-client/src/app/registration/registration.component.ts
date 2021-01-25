@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import config from '../config';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,9 +13,9 @@ export class RegistrationComponent implements OnInit {
 
   email: string = '';
   password: string = '';
+  login: string = '';
 
-
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -22,10 +23,11 @@ export class RegistrationComponent implements OnInit {
   register() {
     const data = {
       email: this.email,
+      login: this.login,
       password: this.password
     };
     this.authService.auth(data, `${config.url}/users/register`);
-    this.email = this.password = "";
+    this.router.navigate(['/']);
   }
 
 }
