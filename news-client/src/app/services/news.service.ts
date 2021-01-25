@@ -16,7 +16,7 @@ export interface IUser {
   email: string;
   login: string;
   avatar: string;
-  news?: INews[]
+  news: INews[]
 }
 
 @Injectable({
@@ -26,6 +26,7 @@ export class NewsService {
 
   news: INews[] = [];
   url: string = `${config.url}/news`;
+  selectedFile!: File;
 
   constructor(private http: HttpClient) { }
 
@@ -34,5 +35,12 @@ export class NewsService {
     .subscribe(news => {
       this.news = news
     })
+  }
+
+  addNews(data: INews) {
+      const fd = new FormData();
+      fd.append('news-img', this.selectedFile);
+      fd.append('news', JSON.stringify(data));
+      return this.http.post<INews>(this.url, fd);
   }
 }

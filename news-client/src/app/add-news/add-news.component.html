@@ -2,21 +2,22 @@
 <div mat-dialog-content class="adding-form-fields">
   <mat-form-field appearance="outline" class="title-field">
     <mat-label>Заголовок</mat-label>
-    <input matInput [(ngModel)]="data.title">
+    <input matInput [(ngModel)]="data.title" required>
   </mat-form-field>
   <mat-form-field appearance="outline" class="content-field">
     <mat-label>Текст новости</mat-label>
-    <textarea matInput [(ngModel)]="data.content"></textarea>
+    <textarea matInput [(ngModel)]="data.content" required></textarea>
   </mat-form-field>
   <mat-form-field appearance="outline" class="tags-field">
     <mat-label>Теги</mat-label>
-    <input matInput [(ngModel)]="data.tags">
+    <input matInput [(ngModel)]="data.tags" required>
     <mat-hint align="start">Введите теги, разделяя пробелами</mat-hint>
   </mat-form-field>
 </div>
 <label for="news-img">Изображение: </label>
-<input type="file" name="news-img">
+<input type="file" name="news-img" (change)="onFileSelected($event)">
+<p [class.warningOn]="!isAllFilled" class="warning">Нужно заполнить все поля!</p>
 <div mat-dialog-actions>
-  <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Добавить</button>
+  <button mat-raised-button color="primary" (click)="onSave()" >Добавить</button>
   <button mat-raised-button color="warn" (click)="onCancel()">Отменить</button>
 </div>

@@ -16,3 +16,12 @@ h1 {
 .content-field textarea{
   height: 200px;
 } 
+
+.warning {
+  display: none;
+  color: red;
+}
+
+.warningOn {
+  display: block;
+}

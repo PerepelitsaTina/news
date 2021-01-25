@@ -13,8 +13,10 @@
     <mat-divider></mat-divider>
     <div class="news-list">
         <app-news 
-          *ngFor="let newsItem of this.user.news" 
-          [item]="newsItem"></app-news>
+          *ngFor="let newsItem of this.user.news | paginate: { itemsPerPage: 3, currentPage: page }" 
+          [item]="newsItem">
+        </app-news>
       </div>
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
 </div>
 
