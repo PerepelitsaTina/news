@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Изменить данные</h1>
+<div mat-dialog-content>
+    <h3 mat-dialog-title>Изменить логин</h3>
+    <mat-form-field appearance="outline" class="login-field">
+        <mat-label>Логин</mat-label>
+        <input matInput value="data.login" [(ngModel)]="data.login" required>
+    </mat-form-field>
+    <h3 mat-dialog-title>Изменить фото профиля</h3>
+    <label for="news-img">Изображение: </label>
+    <input type="file" name="image" (change)="onFileSelected($event)">
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onSave()">Изменить</button>
+    <button mat-raised-button color="warn" (click)="onCancel()">Отменить</button>
+</div>

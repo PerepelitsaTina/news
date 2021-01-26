@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.post('/', upload.single('news-img'), async (req, res, next) => {
+router.post('/', upload.single('image'), async (req, res, next) => {
   try {
   console.log(req.body.news);
     const { user_id, tags, title, content} = JSON.parse(req.body.news);

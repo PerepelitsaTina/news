@@ -4,6 +4,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const { createToken } = require('../utils/jwt');
+const upload = require('../utils//uploads')
 const { response } = require('../app');
 
 
@@ -69,6 +70,33 @@ router.get("/:id", async (req, res, next) => {
     user = user.toJSON();
     delete user.password;
     res.send(user);
+  } catch (error) {
+    res.sendStatus(error.status || 500);
+  }
+})
+
+router.patch("/:id", upload.single('image'), async (req, res, next) => {
+  try {
+    console.log(req.body.info);
+    const updatedUser = {};
+    if(req.body.info) {
+      const { login } = JSON.parse(req.body.info);
+      updatedUser.login = login;
+    }
+    if(req.file) {
+      updatedUser.avatar = req.file.path;
+    }
+
+    let [isUpdated, [user]] = await db.User.update(updatedUser, {
+      where: {
+        id: req.params.id
+      },
+      returning: true
+    });
+
+    user = user.toJSON();
+    delete user.password;
+    res.json(user);
   } catch (error) {
     res.sendStatus(error.status || 500);
   }

@@ -6,6 +6,8 @@ import { UserService } from '../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddNewsComponent } from '../add-news/add-news.component';
 import { NewsComponent } from '../news/news.component';
+import { EditUserComponent } from '../edit-user/edit-user.component';
+import config from '../config';
 
 @Component({
   selector: 'app-user',
@@ -18,6 +20,7 @@ export class UserComponent implements OnInit {
   user!: IUser;
   isCurrentUser!: boolean;
   page: number = 1;
+  url: string = config.url;
 
   constructor(private route: ActivatedRoute,
     public userService: UserService,
@@ -39,7 +42,7 @@ export class UserComponent implements OnInit {
     });
   }
 
-  openDialog() {
+  openNewsDialog() {
     const dialogRef = this.dialog.open(AddNewsComponent, {
       width: '600px',
       data: { user_id: this.user.id },
@@ -56,6 +59,20 @@ export class UserComponent implements OnInit {
       }
     });
   }
+
+  openEditDialog() {
+    const dialogRef = this.dialog.open(EditUserComponent, {
+      width: '600px',
+      data: { login: this.user.login },
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.userService.updateUser(result)
+          }
+        })
+      }
 
 
 }

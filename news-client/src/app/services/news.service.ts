@@ -39,8 +39,11 @@ export class NewsService {
 
   addNews(data: INews) {
       const fd = new FormData();
+      console.log(fd);
       fd.append('news-img', this.selectedFile);
+      console.log(fd);
       fd.append('news', JSON.stringify(data));
+      console.log(fd);
       return this.http.post<INews>(this.url, fd);
   }
 }

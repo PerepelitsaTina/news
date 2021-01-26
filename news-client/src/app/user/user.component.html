@@ -1,13 +1,14 @@
 <div class="user-page-container">
     <div class="user-info">
-        <img [attr.src]="this.user.avatar ? this.user.avatar : '../../assets/no-avatar.png'" class="user-avatar">
+        <img *ngIf="this.user.avatar" src="{{url}}/{{this.user.avatar}}" class="user-avatar">
+        <img *ngIf="!this.user.avatar" src="../../assets/no-avatar.png" class="user-avatar">
         <div class="user-info-body">
             <h1>Логин: {{this.user.login}}</h1>
             <h1>Емейл: {{this.user.email}}</h1>
         </div>
         <div *ngIf="isCurrentUser" class="user-control-buttons">
-            <button class="change-info-btn" mat-raised-button color="primary">Изменить данные</button>
-            <button class="add-post-btn" (click)="openDialog()" mat-raised-button color="accent">Добавить новый пост</button>
+            <button class="change-info-btn" (click)="openEditDialog()" mat-raised-button color="primary">Изменить данные</button>
+            <button class="add-post-btn" (click)="openNewsDialog()" mat-raised-button color="accent">Добавить новый пост</button>
         </div>
     </div>
     <mat-divider></mat-divider>

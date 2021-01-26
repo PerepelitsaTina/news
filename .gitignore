@@ -6,7 +6,7 @@
 # Node artifact files
 node_modules/
 dist/
-news-server/config/config.json
+news-server/uploads/
 
 # Compiled Java class files
 *.class
