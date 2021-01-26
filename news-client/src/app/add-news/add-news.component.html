@@ -15,7 +15,7 @@
   </mat-form-field>
 </div>
 <label for="news-img">Изображение: </label>
-<input type="file" name="news-img" (change)="onFileSelected($event)">
+<input type="file" name="image" (change)="onFileSelected($event)">
 <p [class.warningOn]="!isAllFilled" class="warning">Нужно заполнить все поля!</p>
 <div mat-dialog-actions>
   <button mat-raised-button color="primary" (click)="onSave()" >Добавить</button>

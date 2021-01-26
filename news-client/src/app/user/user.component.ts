@@ -38,6 +38,9 @@ export class UserComponent implements OnInit {
       this.userService.getUser(+params.id).subscribe(user => {
         this.user = user;
         this.isCurrentUser = this.authService.currentUserValue?.user.id === this.user.id;
+        if(this.isCurrentUser) {
+          this.authService.updateUser(this.user.login);
+        }
       });
     });
   }
@@ -69,10 +72,14 @@ export class UserComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.userService.updateUser(result)
+        this.userService.updateUser(result).subscribe(res => {
+          if (res) {
+            this.getUser();
           }
         })
       }
+    })
+  }
 
 
 }

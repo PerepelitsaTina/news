@@ -21,15 +21,10 @@ export class UserService {
     let fd = new FormData();
     if(this.selectedFile) {
       fd.append('image', this.selectedFile);
-      console.log(fd);
     }
     if(data) {
-      console.log(data);
-      console.log(fd);
-      fd.append('info', JSON.stringify(data))
+      fd.append('login', JSON.stringify(data))
     }
-    console.log(fd);
-    
-    // return this.http.patch<IUser>(`${config.url}/users/${this.authService.currentUserValue?.user.id}`, fd)
+    return this.http.patch<IUser>(`${config.url}/users/${this.authService.currentUserValue?.user.id}`, fd)
   }
 }

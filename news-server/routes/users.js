@@ -55,6 +55,8 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+
+
 router.get("/:id", async (req, res, next) => {
   try {
     let user = await db.User.findByPk(req.params.id, {
@@ -77,10 +79,10 @@ router.get("/:id", async (req, res, next) => {
 
 router.patch("/:id", upload.single('image'), async (req, res, next) => {
   try {
-    console.log(req.body.info);
+    console.log(req.body.login);
     const updatedUser = {};
-    if(req.body.info) {
-      const { login } = JSON.parse(req.body.info);
+    if(req.body.login) {
+      const { login } = JSON.parse(req.body.login);
       updatedUser.login = login;
     }
     if(req.file) {
