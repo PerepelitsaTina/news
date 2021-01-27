@@ -1,6 +1,6 @@
 <div class="user-page-container">
     <div class="user-info">
-        <img *ngIf="this.user.avatar" src="{{url}}/{{this.user.avatar}}" class="user-avatar">
+        <img *ngIf="this.user.avatar" src="{{ this.authService.isGoogleUser ? this.user.avatar : url + '/' + this.user.avatar }}" class="user-avatar">
         <img *ngIf="!this.user.avatar" src="../../assets/no-avatar.png" class="user-avatar">
         <div class="user-info-body">
             <h1>Логин: {{this.user.login}}</h1>

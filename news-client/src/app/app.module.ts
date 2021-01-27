@@ -27,6 +27,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { AddNewsComponent } from './add-news/add-news.component';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,13 +58,28 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     MatDividerModule,
     MatIconModule,
     MatDialogModule,
-    TextFieldModule
+    TextFieldModule,
+    SocialLoginModule
   ],
   providers: [
     { 
     provide: HTTP_INTERCEPTORS, 
     useClass: JwtInterceptor, 
     multi: true 
+  },
+  {
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: false,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(
+            '240264501857-g369k2g6ummicqottt0apltiuhgb1h0h.apps.googleusercontent.com'
+          )
+        }
+      ]
+    } as SocialAuthServiceConfig,
   }
 ],
   bootstrap: [AppComponent]

@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -26,4 +26,5 @@ export class LoginComponent implements OnInit {
     this.authService.auth(data, `${config.url}/users/login`);
     this.email = this.password = "";
   }
+
 }
