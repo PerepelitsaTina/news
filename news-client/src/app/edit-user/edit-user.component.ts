@@ -34,6 +34,5 @@ export class EditUserComponent implements OnInit {
   onFileSelected(event: any) {
     this.selectedFile = <File>event.target.files[0];
     this.userService.selectedFile = this.selectedFile;
-    console.log(this.userService.selectedFile);
   }
 }

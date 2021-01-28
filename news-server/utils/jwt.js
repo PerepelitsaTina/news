@@ -12,7 +12,6 @@ JWTOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
 JWTOptions.secretOrKey = SECRET_KEY;
 
 const strategy = new JWTStrategy(JWTOptions, async function(jwt_payload, next) {
-    console.log('payload received', jwt_payload);
     const user = db.User.findOne({
         where: {
             id: jwt_payload.id

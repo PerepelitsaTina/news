@@ -8,4 +8,8 @@
     </mat-form-field >
     <button mat-raised-button color="accent" class="login-btn" (click)="login()">Войти</button>
     <a routerLink="/registration" mat-button color="primary">Регистрация</a>
+    <button mat-stroked-button color="primary" class="google-btn" (click)="this.authService.signInWithGoogle()">Google</button>
 </div>
+
+
+

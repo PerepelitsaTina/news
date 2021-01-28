@@ -36,7 +36,6 @@ export class AddNewsComponent {
     onFileSelected(event: any) {
       this.selectedFile = <File>event.target.files[0];
       this.newsService.selectedFile = this.selectedFile;
-      console.log(this.newsService.selectedFile);
     }
 
     

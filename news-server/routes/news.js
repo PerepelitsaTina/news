@@ -11,14 +11,12 @@ router.get('/', async (req, res, next) => {
     });
     res.send(news);
   } catch (error) {
-    console.log(error)
     res.send(error)
   }
 });
 
 router.post('/', upload.single('image'), async (req, res, next) => {
   try {
-  console.log(req.body.news);
     const { user_id, tags, title, content} = JSON.parse(req.body.news);
     let news = await db.News.create({
       user_id,
@@ -29,7 +27,6 @@ router.post('/', upload.single('image'), async (req, res, next) => {
     });
     res.send(news);
   } catch (error) {
-    console.log(error);
     res.sendStatus(error.status || 500);
   }
 })

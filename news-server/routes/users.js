@@ -26,7 +26,6 @@ router.post("/register", async (req, res, next) => {
       token
     });
   } catch (error) {
-    console.log(error);
     response.status(err.status || 500).send('User was not created');
   }
 });
@@ -55,7 +54,45 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-
+router.post('/googleAuth', async (req, res) => {
+  try {
+    const {
+      email,
+      firstName,
+      lastName,
+      photoUrl
+    } = req.body;
+    let user = await db.User.findOne({
+      where: { 
+        email 
+      }
+    });
+    if (user) {
+      const token = createToken(user.id);
+      user = user.toJSON();
+      delete user.password;
+      res.json({
+        user,
+        token
+      });
+    } else {
+      let newUser = await db.User.create({
+        email,
+        login: firstName + lastName,
+        avatar: photoUrl
+      })
+      const token = createToken(newUser.id);
+      newUser = newUser.toJSON();
+      delete newUser.password;
+      res.json({
+        user: newUser,
+        token
+      });
+    }
+  } catch (e) {
+  }
+}
+)
 
 router.get("/:id", async (req, res, next) => {
   try {
@@ -79,13 +116,12 @@ router.get("/:id", async (req, res, next) => {
 
 router.patch("/:id", upload.single('image'), async (req, res, next) => {
   try {
-    console.log(req.body.login);
     const updatedUser = {};
-    if(req.body.login) {
+    if (req.body.login) {
       const { login } = JSON.parse(req.body.login);
       updatedUser.login = login;
     }
-    if(req.file) {
+    if (req.file) {
       updatedUser.avatar = req.file.path;
     }
 
