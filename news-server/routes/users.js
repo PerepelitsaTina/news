@@ -26,7 +26,6 @@ router.post("/register", async (req, res, next) => {
       token
     });
   } catch (error) {
-    console.log(error);
     response.status(err.status || 500).send('User was not created');
   }
 });
@@ -57,7 +56,6 @@ router.post("/login", async (req, res, next) => {
 
 router.post('/googleAuth', async (req, res) => {
   try {
-    console.log(req.body);
     const {
       email,
       firstName,
@@ -92,7 +90,6 @@ router.post('/googleAuth', async (req, res) => {
       });
     }
   } catch (e) {
-    console.log(e)
   }
 }
 )
@@ -119,7 +116,6 @@ router.get("/:id", async (req, res, next) => {
 
 router.patch("/:id", upload.single('image'), async (req, res, next) => {
   try {
-    console.log(req.body.login);
     const updatedUser = {};
     if (req.body.login) {
       const { login } = JSON.parse(req.body.login);

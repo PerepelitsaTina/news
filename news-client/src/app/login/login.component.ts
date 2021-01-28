@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
       email: this.email,
       password: this.password
     }
-    console.log(data);
     this.authService.auth(data, `${config.url}/users/login`);
     this.email = this.password = "";
   }

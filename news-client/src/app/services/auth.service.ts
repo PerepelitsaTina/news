@@ -37,7 +37,6 @@ export class AuthService {
   }
 
   auth(data: any, url: string) {
-    console.log(data);
     this.http.post<IUser>(url, data)
       .subscribe(response => {
         if (response && response.token) {
@@ -49,10 +48,8 @@ export class AuthService {
   }
 
   googleAuth(data: any) {
-    console.log(data);
     this.http.post<any>(`${config.url}/users/googleAuth`, data)
       .subscribe(response => {
-        console.log(response);
         if (response && response.token) {
           localStorage.setItem('currentUser', JSON.stringify(response));
           this.currentUserSubject.next(response);

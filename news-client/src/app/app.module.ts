@@ -28,6 +28,7 @@ import { AddNewsComponent } from './add-news/add-news.component';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
+import config from './config';
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,7 +76,7 @@ import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 
         {
           id: GoogleLoginProvider.PROVIDER_ID,
           provider: new GoogleLoginProvider(
-            '240264501857-g369k2g6ummicqottt0apltiuhgb1h0h.apps.googleusercontent.com'
+            config.google_id
           )
         }
       ]
