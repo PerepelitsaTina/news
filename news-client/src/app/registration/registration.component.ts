@@ -45,7 +45,10 @@ export class RegistrationComponent implements OnInit {
 
   register() {
     const data = this.registerForm.value;
-    if(this._login?.invalid || this._email?.invalid || this._password?.invalid) {
+    console.log(this._login?.value);
+    
+    
+    if(this._login?.invalid || this._email?.invalid || this._password?.invalid || !this._login?.value.trim() || !this._password?.value.trim()) {
       return;
     }
     this.authService.auth(data, `${config.url}/users/register`);

@@ -1,13 +1,16 @@
 .news-list {
-  padding: 30px;
+  padding: 10px;
   display: flex;
-  flex: 1 1 0;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
-@media (max-width: 400px) {
+.news-item {
+  flex: 1 0 25%;
+}
+
+/* @media (max-width: 400px) {
   .news-list {
     padding: 30px 5px;
   }
-}
+} */
