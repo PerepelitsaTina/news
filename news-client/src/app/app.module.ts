@@ -26,6 +26,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AddNewsComponent } from './add-news/add-news.component';
 import {TextFieldModule} from '@angular/cdk/text-field';
+import { EditUserComponent } from './edit-user/edit-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import {TextFieldModule} from '@angular/cdk/text-field';
     SearchPipe,
     HomePageComponent,
     UserComponent,
-    AddNewsComponent
+    AddNewsComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
