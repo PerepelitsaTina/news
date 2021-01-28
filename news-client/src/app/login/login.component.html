@@ -1,15 +1,19 @@
-<div class="login-form">
+<form [formGroup]="loginForm" class="login-form">
     <h1>Авторизация пользователя</h1>
     <mat-form-field class="email-input">
-        <input matInput type="email" placeholder="Ваш емейл" [(ngModel)]="email">
+        <input matInput type="email" placeholder="Ваш емейл" formControlName="email">
+        <mat-error *ngIf="_email?.invalid">
+            Некорректный емейл
+        </mat-error>
     </mat-form-field>
     <mat-form-field class="password-input">
-        <input matInput type="password" placeholder="Ваш пароль" [(ngModel)]="password">
-    </mat-form-field >
+        <input matInput type="password" placeholder="Ваш пароль" formControlName="password">
+        <mat-error *ngIf="_password?.invalid">
+            Пароль должен содержать минимум 6 символов
+        </mat-error>
+    </mat-form-field>
     <button mat-raised-button color="accent" class="login-btn" (click)="login()">Войти</button>
     <a routerLink="/registration" mat-button color="primary">Регистрация</a>
-    <button mat-stroked-button color="primary" class="google-btn" (click)="this.authService.signInWithGoogle()">Google</button>
-</div>
-
-
-
+    <button mat-stroked-button color="primary" class="google-btn"
+        (click)="this.authService.signInWithGoogle()">Google</button>
+</form>

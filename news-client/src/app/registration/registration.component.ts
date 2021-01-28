@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import config from '../config';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -11,23 +12,44 @@ import { Router } from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
 
-  email: string = '';
-  password: string = '';
-  login: string = '';
+  registerForm!: FormGroup
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router, private fb: FormBuilder) {
+    this._createForm()
+   }
 
   ngOnInit(): void {
   }
 
+  private _createForm() {
+    this.registerForm = this.fb.group({
+      login: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    })
+  }
+
+  get _login() {
+    return this.registerForm.get('login')
+  }
+
+
+  get _email() {
+    return this.registerForm.get('email')
+  }
+
+  get _password() {
+    return this.registerForm.get('password')
+  }
+
+
   register() {
-    const data = {
-      email: this.email,
-      login: this.login,
-      password: this.password
-    };
+    const data = this.registerForm.value;
+    if(this._login?.invalid || this._email?.invalid || this._password?.invalid) {
+      return;
+    }
     this.authService.auth(data, `${config.url}/users/register`);
-    this.router.navigate(['/']);
+    // this.router.navigate(['/']);
   }
 
 }

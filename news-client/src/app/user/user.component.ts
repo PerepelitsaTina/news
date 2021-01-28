@@ -5,7 +5,6 @@ import { INews, IUser, NewsService } from '../services/news.service';
 import { UserService } from '../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddNewsComponent } from '../add-news/add-news.component';
-import { NewsComponent } from '../news/news.component';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import config from '../config';
 
@@ -80,8 +79,4 @@ export class UserComponent implements OnInit {
       }
     })
   }
-
-
 }
-
-

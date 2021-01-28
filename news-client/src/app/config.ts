@@ -1,6 +1,6 @@
 
 const config: any = {
-    url: 'http://localhost:3000'
+    url: 'http://api.t1.academy.dunice-testing.com'
 };
 
 export default config; 
