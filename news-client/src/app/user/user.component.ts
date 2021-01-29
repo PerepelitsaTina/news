@@ -52,6 +52,8 @@ export class UserComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result); 
+      
       if (result) {
         this.newsService.addNews(result).subscribe(news => {
           if (news) {

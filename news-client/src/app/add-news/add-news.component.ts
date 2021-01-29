@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { INews, NewsService } from '../services/news.service';
 
 
@@ -12,33 +13,53 @@ export class AddNewsComponent {
 
   selectedFile!: File;
   isAllFilled: boolean = true;
+  addNewsForm!: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<AddNewsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: INews, public newsService: NewsService) { 
-      
-    }
+    @Inject(MAT_DIALOG_DATA) public data: INews, public newsService: NewsService, private fb: FormBuilder) {
+    this._createForm()
+  }
 
-    onCancel(): void {
-      this.dialogRef.close();
-    }
+  private _createForm() {
+    this.addNewsForm = this.fb.group({
+      title: ['', [Validators.required]],
+      content: ['', [Validators.required]],
+      tags: ['', [Validators.required]]
+    })
+  }
 
-    onSave(): void {
-      if(this.selectedFile && 
-      Object.values(this.data)
-      .filter(item => typeof item === 'string')
-      .every(item => item.trim())) {
-        this.dialogRef.close(this.data);
-      } else {
-        this.isAllFilled = false;
-      }
-    }
+  get _title() {
+    return this.addNewsForm.get('title')
+  }
 
-    onFileSelected(event: any) {
-      this.selectedFile = <File>event.target.files[0];
-      this.newsService.selectedFile = this.selectedFile;
-      console.log(this.newsService.selectedFile);
-    }
+  get _content() {
+    return this.addNewsForm.get('content')
+  }
 
-    
+  get _tags() {
+    return this.addNewsForm.get('tags')
+  }
+
+  onCancel(): void {
+    this.dialogRef.close();
+  }
+
+  onSave(): void {
+    if (!this.selectedFile || this._title?.invalid || this._content?.invalid || this._tags?.invalid ||
+      !this._title?.value.trim() || !this._content?.value.trim() || !this._tags?.value.trim()) {
+      this.isAllFilled = false;
+      return;
+    }
+    this.data = Object.assign(this.data, this.addNewsForm.value);
+    this.dialogRef.close(this.data);
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+    this.newsService.selectedFile = this.selectedFile;
+    console.log(this.newsService.selectedFile);
+  }
+
+
 
 }
