@@ -1,14 +1,20 @@
-<div class="reg-form">
+<form [formGroup]="registerForm" class="reg-form">
     <h1>Регистрация пользователя</h1>
     <mat-form-field class="login-input">
-        <input matInput type="text" placeholder="Ваш логин" [(ngModel)]="login">
+        <input matInput type="text" placeholder="Ваш логин" formControlName="login">
     </mat-form-field>
     <mat-form-field class="email-input">
-        <input matInput type="email" placeholder="Ваш емейл" [(ngModel)]="email">
+        <input matInput type="email" placeholder="Ваш емейл" formControlName="email">
+        <mat-error *ngIf="_email?.invalid">
+            Некорректный емейл
+        </mat-error>
     </mat-form-field>
     <mat-form-field class="password-input">
-        <input matInput type="password" placeholder="Ваш пароль" [(ngModel)]="password">
-    </mat-form-field >
+        <input matInput type="password" placeholder="Ваш пароль" formControlName="password">
+        <mat-error *ngIf="_password?.invalid">
+            Пароль должен содержать минимум 6 символов
+        </mat-error>
+    </mat-form-field>
     <button mat-raised-button color="accent" class="reg-btn" (click)="register()">Регистрация</button>
     <a routerLink="/login" mat-button color="primary">Уже зарегистрированы? Войти</a>
-</div>
+</form>

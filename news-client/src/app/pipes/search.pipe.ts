@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 export class SearchPipe implements PipeTransform {
   transform(news: INews[], filter: string, search: string): INews[] {
-    if (!search) return news;
+    if (!search || search.trim() === '') return news;
     switch (filter) {
       case "tags":
         return news.filter(item => item.tags.includes(search));

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import config from '../config';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,21 +10,36 @@ import config from '../config';
 })
 export class LoginComponent implements OnInit {
 
-  email: string = '';
-  password: string = '';
+  loginForm!: FormGroup
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, private fb: FormBuilder) {
+    this._createForm()
+   }
 
   ngOnInit(): void {
   }
 
+  private _createForm() {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    })
+  }
+
+  get _email() {
+    return this.loginForm.get('email')
+  }
+
+  get _password() {
+    return this.loginForm.get('password')
+  }
+
   login() {
-    const data = {
-      email: this.email,
-      password: this.password
+    const data = this.loginForm.value;
+    if(this._email?.invalid || this._password?.invalid) {
+      return;
     }
     this.authService.auth(data, `${config.url}/users/login`);
-    this.email = this.password = "";
   }
 
 }

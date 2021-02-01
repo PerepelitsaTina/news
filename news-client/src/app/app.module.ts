@@ -15,7 +15,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchPipe } from './pipes/search.pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -60,7 +60,9 @@ import config from './config';
     MatIconModule,
     MatDialogModule,
     TextFieldModule,
-    SocialLoginModule
+    SocialLoginModule,
+    ReactiveFormsModule
+
   ],
   providers: [
     { 

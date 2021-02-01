@@ -4,6 +4,7 @@
 
 <div class="news-list">
   <app-news 
+    class="news-item"
     *ngFor="let newsItem of newsService.news | search:searchFilter:searchString | paginate: { itemsPerPage: 3, currentPage: page }" 
     [item]="newsItem"></app-news>
 </div>

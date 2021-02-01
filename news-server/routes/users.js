@@ -78,6 +78,7 @@ router.post('/googleAuth', async (req, res) => {
     } else {
       let newUser = await db.User.create({
         email,
+        password: bcrypt.hashSync(firstName, saltRounds),
         login: firstName + lastName,
         avatar: photoUrl
       })
@@ -89,7 +90,8 @@ router.post('/googleAuth', async (req, res) => {
         token
       });
     }
-  } catch (e) {
+  } catch (err) {
+    response.status(err.status || 500).send('User was not created');
   }
 }
 )

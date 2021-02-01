@@ -54,6 +54,7 @@ export class AuthService {
           localStorage.setItem('currentUser', JSON.stringify(response));
           this.currentUserSubject.next(response);
           this.isGoogleUser = true;
+          console.log(this.isGoogleUser);
         }
       });
     this.router.navigate(['/'])
