@@ -11,10 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     avatar: DataTypes.STRING
   }, {})
   User.associate = function(models) {
-    User.hasMany(models.News, {
-      foreignKey: 'user_id',
-      as: 'news',
-    });
+    User.hasMany(models.News, { foreignKey: 'user_id', as: 'news' });
+    User.hasMany(models.Like, { foreignKey: 'user_id', as: 'likes' });
   };
   return User;
 };
