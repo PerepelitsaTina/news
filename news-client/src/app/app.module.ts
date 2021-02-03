@@ -28,7 +28,10 @@ import { AddNewsComponent } from './add-news/add-news.component';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
+import {MatTabsModule} from '@angular/material/tabs';
 import config from './config';
+import { MapPipe } from './pipes/map.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +43,8 @@ import config from './config';
     HomePageComponent,
     UserComponent,
     AddNewsComponent,
-    EditUserComponent
+    EditUserComponent,
+    MapPipe
   ],
   imports: [
     BrowserModule,
@@ -61,8 +65,8 @@ import config from './config';
     MatDialogModule,
     TextFieldModule,
     SocialLoginModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    MatTabsModule
   ],
   providers: [
     { 

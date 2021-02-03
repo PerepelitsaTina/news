@@ -29,11 +29,15 @@
 }
 
 .news-list {
-  padding: 30px;
+  padding: 10px;
   display: flex;
-  flex: 1 1 0;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
+}
+
+.news-item {
+  flex: 1 0 25%;
+  max-width: 400px;
 }
 
 @media (max-width: 1040px) {

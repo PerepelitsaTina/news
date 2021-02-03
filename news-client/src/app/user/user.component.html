@@ -1,23 +1,42 @@
 <div class="user-page-container">
     <div class="user-info">
-        <img *ngIf="this.user.avatar" src="{{ this.authService.isGoogleUser ? this.user.avatar : url + '/' + this.user.avatar }}" class="user-avatar">
+        <img *ngIf="this.user.avatar"
+            src="{{ this.authService.isGoogleUser ? this.user.avatar : url + '/' + this.user.avatar }}"
+            class="user-avatar">
         <img *ngIf="!this.user.avatar" src="../../assets/no-avatar.png" class="user-avatar">
         <div class="user-info-body">
             <h1>Логин: {{this.user.login}}</h1>
             <h1>Емейл: {{this.user.email}}</h1>
         </div>
         <div *ngIf="isCurrentUser" class="user-control-buttons">
-            <button class="change-info-btn" (click)="openEditDialog()" mat-raised-button color="primary">Изменить данные</button>
-            <button class="add-post-btn" (click)="openNewsDialog()" mat-raised-button color="accent">Добавить новый пост</button>
+            <button class="change-info-btn" (click)="openEditDialog()" mat-raised-button color="primary">Изменить
+                данные</button>
+            <button class="add-post-btn" (click)="openNewsDialog()" mat-raised-button color="accent">Добавить новый
+                пост</button>
         </div>
     </div>
     <mat-divider></mat-divider>
-    <div class="news-list">
-        <app-news 
-          *ngFor="let newsItem of this.user.news | paginate: { itemsPerPage: 3, currentPage: page }" 
-          [item]="newsItem">
-        </app-news>
-      </div>
-      <pagination-controls (pageChange)="page = $event"></pagination-controls>
-</div>
+    <div class="tabs">
+    </div>
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Мои новости">
+            <div class="news-list">
+                <app-news 
+                  *ngFor="let newsItem of this.user.news | paginate: { itemsPerPage: 2, currentPage: page1,  id: 'first'}" 
+                  [item]="newsItem">
+                </app-news>
+            </div>
+            <pagination-controls (pageChange)="page1 = $event" id="first"></pagination-controls>
+        </mat-tab>
+        <mat-tab label="Понравилось">
+            <div class="news-list">
+                <app-news 
+                  *ngFor="let newsItem of this.user.likes | map | paginate: { itemsPerPage: 2, currentPage: page2, id: 'second' }" 
+                  [item]="newsItem">
+                </app-news>
+            </div>
+            <pagination-controls (pageChange)="page2 = $event" id="second"></pagination-controls>
+        </mat-tab>
+    </mat-tab-group>
 
+</div>

@@ -6,6 +6,9 @@ const saltRounds = 10;
 const { createToken } = require('../utils/jwt');
 const upload = require('../utils//uploads')
 const { response } = require('../app');
+const passport = require('passport');
+const auth = passport.authenticate('jwt', {session: false});
+
 
 
 router.post("/register", async (req, res, next) => {
@@ -96,14 +99,32 @@ router.post('/googleAuth', async (req, res) => {
 }
 )
 
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", auth, async (req, res, next) => {
   try {
-    let user = await db.User.findByPk(req.params.id, {
-      include: {
-        model: db.News, as: "news"
-      },
+    const currentUser = req.user;
+    const options = {
+      include: [{
+        model: db.News, 
+        as: "news", 
+        include: { 
+          model: db.Like, 
+          as: "likes", 
+        }
+      }, {
+        model: db.Like,
+        as: "likes",
+        include: {
+          model: db.News,
+          as: "news",
+          include: { 
+            model: db.Like, 
+            as: "likes", 
+          }
+        }
+      }],
       order: [[{ model: db.News, as: "news" }, 'createdAt', 'DESC']]
-    });
+    }
+    let user = await db.User.findByPk(req.params.id, options);
 
     if (!user) {
       return res.status(404).send("User is not found");
@@ -112,6 +133,7 @@ router.get("/:id", async (req, res, next) => {
     delete user.password;
     res.send(user);
   } catch (error) {
+    console.log(error);
     res.sendStatus(error.status || 500);
   }
 })

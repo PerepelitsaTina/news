@@ -7,7 +7,10 @@ router.get('/', async (req, res, next) => {
   try {
     const news = await db.News.findAll({
       order: [['createdAt', 'DESC']],
-      include:  {model: db.User, as: "user"}
+      include:  [
+        {model: db.User, as: "user"},
+        {model: db.Like, as: "likes", attributes: ['user_id']}
+      ]
     });
     res.send(news);
   } catch (error) {

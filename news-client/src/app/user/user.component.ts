@@ -18,7 +18,9 @@ export class UserComponent implements OnInit {
   id!: number;
   user!: IUser;
   isCurrentUser!: boolean;
-  page: number = 1;
+  page1: number = 1;
+  page2: number = 1;
+
   url: string = config.url;
 
   constructor(private route: ActivatedRoute,
@@ -28,14 +30,18 @@ export class UserComponent implements OnInit {
     private newsService: NewsService) {
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
     this.getUser();
+  
   }
 
   getUser() {
     this.route.params.subscribe(params => {
       this.userService.getUser(+params.id).subscribe(user => {
+        console.log(this.user);
+        
         this.user = user;
+        console.log(this.user);
         this.isCurrentUser = this.authService.currentUserValue?.user.id === this.user.id;
         if(this.isCurrentUser) {
           this.authService.updateUser(this.user.login);

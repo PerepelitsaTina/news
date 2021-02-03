@@ -14,4 +14,10 @@
   <div class="news-image">
     <img *ngIf="item.images" src="{{url}}/{{item.images}}">
   </div>
+  <ng-container *ngIf="this.authService.currentUserValue">
+    <button mat-stroked-button (click)="like()">
+      <mat-icon  class="like-icon" [class.like]="isLiked">favorite</mat-icon>
+    <span>Мне нравится</span>
+    </button>
+  </ng-container>
 </mat-card>

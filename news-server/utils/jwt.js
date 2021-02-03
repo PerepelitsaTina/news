@@ -12,7 +12,7 @@ JWTOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
 JWTOptions.secretOrKey = SECRET_KEY;
 
 const strategy = new JWTStrategy(JWTOptions, async function(jwt_payload, next) {
-    const user = db.User.findOne({
+    const user = await db.User.findOne({
         where: {
             id: jwt_payload.id
         }
@@ -31,7 +31,7 @@ const createToken = (userId) => {
     },
     SECRET_KEY,
     {
-      expiresIn: "20m"
+      expiresIn: "120m"
     }
     );
 };

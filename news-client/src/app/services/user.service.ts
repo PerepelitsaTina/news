@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { IUser } from './news.service';
 import config from '../config'
 import { AuthService } from './auth.service';
+import { timer } from 'rxjs';
+import {  debounce } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'

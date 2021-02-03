@@ -6,8 +6,17 @@
 }
 
 .news-image {
-  width: 90%;
+  max-width: 500px;
   border-radius: 20px;
+}
+
+.like-icon {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.like {
+  color: red;
 }
 
 .news-image img {
