@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import config from '../config'
+import { AuthService } from './auth.service';
 
 export interface INews {
   id?: number;
@@ -37,13 +38,17 @@ export class NewsService {
   url: string = `${config.url}/news`;
   selectedFile!: File;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   getNews() {
     this.http.get<INews[]>(this.url)
     .subscribe(news => {
       this.news = news
     })
+  }
+
+  getFavouriteNews() {
+    return this.http.get<ILike[]>(`${config.url}/likes?user=${this.authService.currentUserValue?.user.id}`)
   }
 
   addNews(data: INews) {

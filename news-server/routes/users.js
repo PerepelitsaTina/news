@@ -29,7 +29,7 @@ router.post("/register", async (req, res, next) => {
       token
     });
   } catch (error) {
-    response.status(err.status || 500).send('User was not created');
+    res.status(err.status || 500).send('User was not created');
   }
 });
 
@@ -39,7 +39,8 @@ router.post("/login", async (req, res, next) => {
     let user = await db.User.findOne({
       where: {
         email
-      }
+      },
+      include: {model: db.User, as: 'subscriptions'}
     });
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = createToken(user.id);
@@ -53,6 +54,7 @@ router.post("/login", async (req, res, next) => {
       res.sendStatus(401);
     }
   } catch (error) {
+    console.log(error);
     res.sendStatus(error.status || 500);
   }
 });
@@ -101,7 +103,6 @@ router.post('/googleAuth', async (req, res) => {
 
 router.get("/:id", auth, async (req, res, next) => {
   try {
-    const currentUser = req.user;
     const options = {
       include: [{
         model: db.News, 
@@ -109,17 +110,6 @@ router.get("/:id", auth, async (req, res, next) => {
         include: { 
           model: db.Like, 
           as: "likes", 
-        }
-      }, {
-        model: db.Like,
-        as: "likes",
-        include: {
-          model: db.News,
-          as: "news",
-          include: { 
-            model: db.Like, 
-            as: "likes", 
-          }
         }
       }],
       order: [[{ model: db.News, as: "news" }, 'createdAt', 'DESC']]

@@ -8,7 +8,7 @@
     </mat-card-content>
     <mat-card-subtitle>
       <p>Теги: {{item.tags}}</p>
-      <p *ngIf="item.user"> Автор: <a [routerLink]="['user', item.user.id]">{{item.user.login}}</a></p>
+      <p *ngIf="item.user"> Автор: <a [routerLink]="['/user', item.user.id]">{{item.user.login}}</a></p>
     </mat-card-subtitle>
   </div>
   <div class="news-image">

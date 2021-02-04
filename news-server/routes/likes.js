@@ -16,6 +16,33 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const user_id = req.query.user;
+    let likes = await db.Like.findAll({
+      where: {
+        user_id,
+      },
+      include: { 
+        model: db.News, 
+        as: "news",
+        include: [{
+          model: db.Like,
+          as: "likes"
+        }, {
+          model: db.User,
+          as: "user"
+        }]
+      },
+      order: [['createdAt', 'DESC']]
+    });
+    res.send(likes)
+  } catch (error) {
+    console.log(error);
+    res.send(error)
+  }
+});
+
 router.delete("/", async (req, res) => {
   try {
     const user_id = req.query.user;
@@ -23,20 +50,20 @@ router.delete("/", async (req, res) => {
     const result = await db.Like.destroy({
       where: {
         user_id,
-        news_id
-      }
+        news_id,
+      },
     });
     console.log(result);
-    if(result === 0) {
+    if (result === 0) {
       throw {
         status: 404,
-        message: "Not found"
+        message: "Not found",
       };
     }
     res.send(result.toJSON());
   } catch (error) {
-    res.send(error)
+    res.send(error);
   }
-})
+});
 
 module.exports = router;

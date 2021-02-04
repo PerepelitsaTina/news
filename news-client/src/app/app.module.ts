@@ -28,8 +28,7 @@ import { AddNewsComponent } from './add-news/add-news.component';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
-import {MatTabsModule} from '@angular/material/tabs';
-import config from './config';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';import config from './config';
 import { MapPipe } from './pipes/map.pipe';
 
 @NgModule({
@@ -66,8 +65,8 @@ import { MapPipe } from './pipes/map.pipe';
     TextFieldModule,
     SocialLoginModule,
     ReactiveFormsModule,
-    MatTabsModule
-  ],
+    MatButtonToggleModule 
+   ],
   providers: [
     { 
     provide: HTTP_INTERCEPTORS, 

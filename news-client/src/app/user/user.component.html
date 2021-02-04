@@ -14,29 +14,20 @@
             <button class="add-post-btn" (click)="openNewsDialog()" mat-raised-button color="accent">Добавить новый
                 пост</button>
         </div>
+        <!-- <div *ngIf="!isCurrentUser" class="user-control-buttons">
+            <button (click)="openEditDialog()" mat-raised-button color="primary"></button>
+        </div> -->
     </div>
     <mat-divider></mat-divider>
-    <div class="tabs">
+    <mat-button-toggle-group *ngIf="isCurrentUser" class="tabs">
+        <mat-button-toggle [class.mat-button-toggle-checked]="activeTab === 'my-news'" (click)="getUser()" #myNews
+            value="my-news">Мои записи</mat-button-toggle>
+        <mat-button-toggle (click)="showLikedNews()" value="liked">Понравилось</mat-button-toggle>
+    </mat-button-toggle-group>
+    <div class="news-list">
+        <app-news *ngFor="let newsItem of this.news | paginate: { itemsPerPage: 2, currentPage: page }"
+            [item]="newsItem">
+        </app-news>
     </div>
-    <mat-tab-group mat-align-tabs="center">
-        <mat-tab label="Мои новости">
-            <div class="news-list">
-                <app-news 
-                  *ngFor="let newsItem of this.user.news | paginate: { itemsPerPage: 2, currentPage: page1,  id: 'first'}" 
-                  [item]="newsItem">
-                </app-news>
-            </div>
-            <pagination-controls (pageChange)="page1 = $event" id="first"></pagination-controls>
-        </mat-tab>
-        <mat-tab label="Понравилось">
-            <div class="news-list">
-                <app-news 
-                  *ngFor="let newsItem of this.user.likes | map | paginate: { itemsPerPage: 2, currentPage: page2, id: 'second' }" 
-                  [item]="newsItem">
-                </app-news>
-            </div>
-            <pagination-controls (pageChange)="page2 = $event" id="second"></pagination-controls>
-        </mat-tab>
-    </mat-tab-group>
-
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
 </div>

@@ -20,7 +20,6 @@ export class NewsComponent implements OnInit {
 
   ngOnInit() {
     this.isLiked = this.item.likes.some(item => item.user_id === this.authService.currentUserValue?.user.id);
-    // console.log(this.item);
   }
 
   like() {

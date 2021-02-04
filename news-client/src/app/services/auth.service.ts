@@ -13,6 +13,7 @@ export interface IUser {
     avatar: string;
     createdAt: string;
     updatedAt: string;
+    subscriptions: IUser[];
   }
   token?: string;
 }
@@ -39,6 +40,7 @@ export class AuthService {
   auth(data: any, url: string) {
     this.http.post<IUser>(url, data)
       .subscribe(response => {
+        console.log(response);
         if (response && response.token) {
           localStorage.setItem('currentUser', JSON.stringify(response));
           this.currentUserSubject.next(response);
@@ -54,7 +56,6 @@ export class AuthService {
           localStorage.setItem('currentUser', JSON.stringify(response));
           this.currentUserSubject.next(response);
           this.isGoogleUser = true;
-          console.log(this.isGoogleUser);
         }
       });
     this.router.navigate(['/'])
