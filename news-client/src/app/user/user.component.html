@@ -1,8 +1,6 @@
 <div class="user-page-container">
     <div class="user-info">
-        <img *ngIf="this.user.avatar"
-            src="{{ this.authService.isGoogleUser ? this.user.avatar : url + '/' + this.user.avatar }}"
-            class="user-avatar">
+        <img *ngIf="this.user.avatar" src="{{ this.authService.isGoogleUser ? this.user.avatar : url + '/' + this.user.avatar }}" class="user-avatar">
         <img *ngIf="!this.user.avatar" src="../../assets/no-avatar.png" class="user-avatar">
         <div class="user-info-body">
             <h1>Логин: {{this.user.login}}</h1>
@@ -14,19 +12,35 @@
             <button class="add-post-btn" (click)="openNewsDialog()" mat-raised-button color="accent">Добавить новый
                 пост</button>
         </div>
-        <!-- <div *ngIf="!isCurrentUser" class="user-control-buttons">
-            <button (click)="openEditDialog()" mat-raised-button color="primary"></button>
-        </div> -->
+        <div *ngIf="!isCurrentUser && !isSubscription" class="user-control-buttons">
+            <button (click)="subscribeUser()" mat-raised-button color="primary">Подписаться</button>
+        </div>
+        <div *ngIf="!isCurrentUser && isSubscription" class="user-control-buttons">
+            <button (click)="unsubscribeUser()" mat-raised-button color="primary">Отписаться</button>
+        </div>
+        <mat-accordion *ngIf="isCurrentUser" class="friends-panel">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <mat-icon class="friends-icon">people</mat-icon>
+                        Мои подписки
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ul *ngIf="this.authService.currentUserValue">
+                    <li *ngFor="let item of subscriptions">
+                        <a [routerLink]="['/user', item.id]">{{item.login}}</a>
+                    </li>
+                </ul>
+            </mat-expansion-panel>
+        </mat-accordion>
     </div>
     <mat-divider></mat-divider>
     <mat-button-toggle-group *ngIf="isCurrentUser" class="tabs">
-        <mat-button-toggle [class.mat-button-toggle-checked]="activeTab === 'my-news'" (click)="getUser()" #myNews
-            value="my-news">Мои записи</mat-button-toggle>
+        <mat-button-toggle [class.mat-button-toggle-checked]="activeTab === 'my-news'" (click)="getUser()" #myNews value="my-news">Мои записи</mat-button-toggle>
         <mat-button-toggle (click)="showLikedNews()" value="liked">Понравилось</mat-button-toggle>
     </mat-button-toggle-group>
     <div class="news-list">
-        <app-news *ngFor="let newsItem of this.news | paginate: { itemsPerPage: 2, currentPage: page }"
-            [item]="newsItem">
+        <app-news *ngFor="let newsItem of this.news | paginate: { itemsPerPage: 2, currentPage: page }" [item]="newsItem">
         </app-news>
     </div>
     <pagination-controls (pageChange)="page = $event"></pagination-controls>

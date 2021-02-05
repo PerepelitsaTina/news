@@ -17,4 +17,27 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.delete("/", async (req, res) => {
+  try {
+    const follower_id = req.query.follower;
+    const subscription_id = req.query.subscription;
+    const result = await db.Subscription.destroy({
+      where: {
+        follower_id,
+        subscription_id
+      },
+    });
+    console.log(result);
+    if (result === 0) {
+      throw {
+        status: 404,
+        message: "Not found",
+      };
+    }
+    res.send(result.toJSON());
+  } catch (error) {
+    res.send(error)
+  }
+});
+
 module.exports = router;

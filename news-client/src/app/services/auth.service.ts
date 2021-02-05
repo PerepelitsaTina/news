@@ -13,9 +13,16 @@ export interface IUser {
     avatar: string;
     createdAt: string;
     updatedAt: string;
-    subscriptions: IUser[];
+    subscriptions: Array<ISubscription>;
   }
   token?: string;
+}
+
+export interface ISubscription {
+  id?: number;
+  follower_id: number;
+  subscription_id: number;
+  login?: string;
 }
 
 @Injectable({
@@ -40,13 +47,24 @@ export class AuthService {
   auth(data: any, url: string) {
     this.http.post<IUser>(url, data)
       .subscribe(response => {
-        console.log(response);
+        console.log(response.user.subscriptions[0].login);
         if (response && response.token) {
           localStorage.setItem('currentUser', JSON.stringify(response));
           this.currentUserSubject.next(response);
         }
       });
     this.router.navigate(['/'])
+  }
+
+  getCurrentUser() {
+    this.http.get(`${config.url}/users/me`).subscribe(user => {
+      const currentUser = {
+        user,
+        token: this.currentUserValue?.token
+      }
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      this.currentUserSubject.next(currentUser);
+    })
   }
 
   googleAuth(data: any) {

@@ -29,6 +29,8 @@ import {TextFieldModule} from '@angular/cdk/text-field';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';import config from './config';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 import { MapPipe } from './pipes/map.pipe';
 
 @NgModule({
@@ -65,7 +67,8 @@ import { MapPipe } from './pipes/map.pipe';
     TextFieldModule,
     SocialLoginModule,
     ReactiveFormsModule,
-    MatButtonToggleModule 
+    MatButtonToggleModule ,
+    MatExpansionModule
    ],
   providers: [
     { 

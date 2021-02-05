@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IUser } from './news.service';
 import config from '../config'
-import { AuthService } from './auth.service';
+import { AuthService, ISubscription } from './auth.service';
 import { timer } from 'rxjs';
 import {  debounce } from 'rxjs/operators'
 
@@ -28,5 +28,13 @@ export class UserService {
       fd.append('login', JSON.stringify(data))
     }
     return this.http.patch<IUser>(`${config.url}/users/${this.authService.currentUserValue?.user.id}`, fd)
+  }
+
+  addSubscription(body: ISubscription) {
+    return this.http.post<ISubscription>(`${config.url}/subscription`, body)
+  }
+
+  deleteSubscription(body: ISubscription) {
+    return this.http.delete(`${config.url}/subscription?follower=${body.follower_id}&subscription=${body.subscription_id}`)
   }
 }
