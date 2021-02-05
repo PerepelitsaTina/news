@@ -30,8 +30,12 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';import config from './config';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { MapPipe } from './pipes/map.pipe';
+import { ChatComponent } from './chat/chat.component';
+
+const socketConfig: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
   declarations: [
@@ -45,7 +49,8 @@ import { MapPipe } from './pipes/map.pipe';
     UserComponent,
     AddNewsComponent,
     EditUserComponent,
-    MapPipe
+    MapPipe,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +73,8 @@ import { MapPipe } from './pipes/map.pipe';
     SocialLoginModule,
     ReactiveFormsModule,
     MatButtonToggleModule ,
-    MatExpansionModule
+    MatExpansionModule,
+    SocketIoModule.forRoot(socketConfig)
    ],
   providers: [
     { 

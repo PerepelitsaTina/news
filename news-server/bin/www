@@ -7,6 +7,13 @@
 var app = require('../app');
 var debug = require('debug')('news-server:server');
 var http = require('http');
+const models = require("../models");
+const cors = require('cors');
+const logger = require('morgan');
+
+app.use(cors());
+app.use(logger('dev'));
+
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +27,29 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+const io = require("socket.io")(server);
+io.on("connection", socket => {
+  console.log("connected");
+  // socket.on("join", async room => {
+  //   socket.join(room);
+  //   io.emit("roomJoined", room);
+  // });
+  // socket.on("message", async data => {
+  //   const { chatRoomName, author, message } = data;
+  //   const chatRoom = await models.ChatRoom.findAll({
+  //     where: { name: chatRoomName },
+  //   });
+  //   const chatRoomId = chatRoom[0].id;
+  //   const chatMessage = await models.ChatMessage.create({
+  //     chatRoomId,
+  //     author,
+  //     message: message,
+  //   });
+  //   io.emit("newMessage", chatMessage);
+  // });
+});
+
 
 /**
  * Listen on provided port, on all network interfaces.
